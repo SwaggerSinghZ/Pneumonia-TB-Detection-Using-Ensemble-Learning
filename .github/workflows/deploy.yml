@@ -12,17 +12,18 @@ jobs:
     steps:
 
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
-        python-version: 3.10
+        python-version: "3.10"
 
     - name: Install Dependencies
       run: |
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Check Streamlit App Runs
+    - name: Run Streamlit App (Test)
       run: |
         timeout 20s streamlit run streamlit_app/app.py --server.headless true || true
